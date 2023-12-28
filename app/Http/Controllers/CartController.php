@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -12,7 +13,17 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $userId = auth()->id();
+        $query = Cart::query();
+
+        $query->with('product');
+
+        $query->where('user_id',$userId);
+
+        $response = $query->get();
+
+        Debugbar::info($response);
+        return response()->json($response);
     }
 
     /**
@@ -28,7 +39,24 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $userId = auth()->id();
+        $productId = $request->input('product_id');
+
+        $instance = Cart::where('user_id', $userId)->where('product_id',$productId)->first();
+
+        if ($instance) {
+            // レコードが存在する場合の処理
+            $instance->increment('amount');
+        } else {
+            // レコードが存在しない場合の処理
+            $instance = Cart::create([
+                'user_id' => $userId, 
+                'product_id' => $productId,
+                'amount' => 1
+            ]);
+        }
+
+        return $instance;
     }
 
     /**
