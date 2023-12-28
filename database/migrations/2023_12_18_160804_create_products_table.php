@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->integer('price');
             $table->string('title',50);
+            $table->string('image_path')->nullable(true);
             $table->integer('stock');
         });
     }
