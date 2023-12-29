@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useEffect, useState } from "react";
 import { getCart } from "../../services/appClient";
 import CartItem from "../elements/CartItem";
@@ -15,7 +15,6 @@ type Cart = {
 
 const Cart = () => {
     const [cartList, setCartLists] = useState<Cart[]>([]);
-    const [grandTotal, setGrandTotal] = useState(0);
 
     const updateItemAmount = (itemId: number, newAmount: number) => {
         const updatedCartList = cartList.map((item) => {
@@ -41,13 +40,11 @@ const Cart = () => {
         fetchCartList();
     }, []);
 
-    useEffect(() => {
-        const newGrandTotal = cartList.reduce((sum, item) => {
-            return sum + item.product.price * item.amount;
-        }, 0);
-        setGrandTotal(newGrandTotal);
+    const grandTotal = useMemo(() => {
+        return cartList.reduce((sum, item) => sum + item.product.price * item.amount, 0);
     }, [cartList]);
-
+    
+    
     return (
         <div className="grid grid-cols-1 md:grid-cols-10">
             <div className="md:col-span-3 md:order-2 bg-white p-5">
