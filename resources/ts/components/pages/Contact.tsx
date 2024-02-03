@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { sendContact } from "../../services/appClient";
-import Button from "../elements/Button";
+import Button from "../atoms/Button";
 import { useForm } from "react-hook-form";
 import { check } from "prettier";
 
@@ -73,7 +73,7 @@ const Contact = () => {
                             {...register('content',{required: true})}
                         />
                     </div>
-                    <Button text="送信" />
+                    <Button>送信</Button>
                 </form>
             </div>
         </div>

@@ -1,13 +1,14 @@
 import React from "react";
-import Header from "./components/commons/Header";
-import Footer from "./components/commons/Footer";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/pages/Home";
-import Layout from "./components/commons/Layout";
 import Cart from "./components/pages/Cart";
 import Contact from "./components/pages/Contact";
 import Login from "./components/pages/Login";
 import { useAuth } from "./context/AuthContext";
+import { ThemeProvider } from "styled-components";
+import { theme } from "./styles/theme";
+import Layout from "./components/templates/Layout";
+import CartContextProvider from "./context/CartContext";
 
 type routeProps = {
     children: React.ReactNode;
@@ -26,7 +27,7 @@ const RedirectIfLoggedIn = ({ children }: routeProps) => {
 const App = () => {
     return (
         <>
-            <Header />
+            <ThemeProvider theme={theme}>
             <Layout>
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -34,7 +35,9 @@ const App = () => {
                         path="/cart"
                         element={
                             <ProtectedRoute>
-                                <Cart />
+                                <CartContextProvider>
+                                    <Cart />
+                                </CartContextProvider>
                             </ProtectedRoute>
                         }
                     />
@@ -49,7 +52,7 @@ const App = () => {
                     />
                 </Routes>
             </Layout>
-            <Footer />
+            </ThemeProvider>
         </>
     );
 };
