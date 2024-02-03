@@ -7,7 +7,6 @@ export default defineConfig({
         laravel({
             // input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
-
             // typescriptとsassが使えるように変更
             input: [
                 'resources/sass/app.scss', 

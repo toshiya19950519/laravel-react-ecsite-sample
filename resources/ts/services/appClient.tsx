@@ -17,6 +17,16 @@ export const login = async (email: string, password: string) => {
     }
 };
 
+export const logout = async () => {
+    try {
+        const response = await apiClient.post("/logout");
+        return response.data;
+    } catch (error) {
+        console.error("Error during logout:", error);
+        throw error;
+    }
+};
+
 export const getUser = async () => {
     try {
         const response = await apiClient.get("/user");

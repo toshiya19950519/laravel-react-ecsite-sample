@@ -22,7 +22,6 @@ class CartController extends Controller
 
         $response = $query->get();
 
-        Debugbar::info($response);
         return response()->json($response);
     }
 
