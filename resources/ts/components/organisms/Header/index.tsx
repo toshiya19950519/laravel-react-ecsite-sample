@@ -7,6 +7,7 @@ import Image from "../../atoms/Image";
 import styled from "styled-components";
 
 const StyledHeader = styled.header`
+    background-color: #fff;
     padding: 1.5rem 3.0rem;
     @media (max-width: ${props => props.theme.breakpoints.tablet}) {
         padding: 1.0rem 0.5rem;
@@ -73,7 +74,6 @@ const Header = () => {
     const dropdownRef = useRef<HTMLDivElement>(null);
     const { user, setUser } = useAuth();
     const navigate = useNavigate()
-
     const handleLogout = async () => {
         await logout();
         setUser(null);
@@ -95,8 +95,8 @@ const Header = () => {
         const fetchData = async () => {
             try {
                 const userData = await getUser();
+                console.log(userData)
                 setUser(userData);
-                navigate("/login");
             } catch (error) {
                 console.error("Error fetching user data:", error);
             }

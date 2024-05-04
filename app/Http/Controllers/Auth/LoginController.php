@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -23,12 +24,16 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             // 認証されたユーザー情報を取得
-            $user = Auth::user();
+            //$user = Auth::user();
+
+            $user = User::where('email', $request->email)->first();
+            $user->tokens()->delete();
+            $token = $user->createToken("login:user{$user->id}")->plainTextToken;
+
     
             // ユーザー情報を含むレスポンスを返す
             return response()->json([
-                'message' => 'Logged in successfully.',
-                'user' => $user
+                'token' => $token,
             ]);
         
         }

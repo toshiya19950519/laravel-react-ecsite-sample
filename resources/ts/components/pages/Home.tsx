@@ -5,6 +5,7 @@ import ProductCard from "../organisms/ProductCard";
 import styled from "styled-components";
 import { LoadingSpinner } from "../atoms/Spinner";
 import { useLoadingSpinner } from "../../context/LoadingSpinnerContext";
+import Banner from "../organisms/Banner";
 
 const StyledProducts = styled.div`
     @media (max-width: ${props => props.theme.breakpoints.tablet}) {
@@ -12,7 +13,6 @@ const StyledProducts = styled.div`
     }
 
     @media (min-width: ${props => props.theme.breakpoints.desktop}) {
-        padding: 0.75rem;
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 1rem;
@@ -78,6 +78,7 @@ const Home = () => {
 
     return (
         <>
+            <Banner/>
             <StyledProducts>
                 {products.map((product) => (
                     <ProductCard key={product.id} {...product} />

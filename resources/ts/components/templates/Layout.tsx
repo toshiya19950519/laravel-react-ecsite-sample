@@ -4,7 +4,13 @@ import Footer from "../organisms/Footer"
 import Header from "../organisms/Header"
 
 const StyledMain = styled.main`
-    background-color: #e6e6e6;
+    padding: 50px 0 80px;
+`
+
+const StyledContainer = styled.div`
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
 `
 
 interface LayoutProps {
@@ -16,7 +22,9 @@ const Layout = ({children}:LayoutProps) => {
         <>
         <Header/>
         <StyledMain>
+        <StyledContainer>
         <div className="container mx-auto">{children}</div>
+        </StyledContainer>
         </StyledMain>
         <Footer/>
         </>

@@ -12,7 +12,6 @@ class ContactController extends Controller{
     public function __invoke(Request $request)
     {
         $data = $request->all();
-        Debugbar::info($data);
         
         Mail::to('recipient@example.com')->send(new Contact($data));
     }

@@ -9,6 +9,7 @@ import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme";
 import Layout from "./components/templates/Layout";
 import CartContextProvider from "./context/CartContext";
+import SignUp from "./components/organisms/SignUpForm";
 
 type routeProps = {
     children: React.ReactNode;
@@ -48,6 +49,14 @@ const App = () => {
                             <RedirectIfLoggedIn>
                                 <Login />
                             </RedirectIfLoggedIn>
+                        }
+                    />
+                    <Route
+                        path="/signUp"
+                        element={
+                            <>
+                                <SignUp />
+                            </>
                         }
                     />
                 </Routes>
