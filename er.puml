@@ -1,0 +1,32 @@
+@startuml er
+entity "products" as 製品 {
+    * product_id : int
+}
+
+entity "carts" as カート {
+    * cart_id : int
+    user_id : int
+}
+
+entity "cart_items" as カートの詳細 {
+    cart_id : int
+    product_id : int
+}
+
+entity "users" as ユーザー {
+    * user_id : int
+}
+
+entity "purchases" as 購入履歴 {
+    * purchase_id : int
+    user_id : int
+    cart_id : int
+}
+
+製品 ||--{ カートの詳細 : contains
+カート ||--{ カートの詳細 : contains
+ユーザー ||--o{ カート : creates
+ユーザー ||--o{ 購入履歴 : makes
+購入履歴 ||--|| カート : makes
+
+@enduml

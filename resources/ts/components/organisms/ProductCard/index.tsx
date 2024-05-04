@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { addCart } from "../../../services/appClient";
 import Image from "../../atoms/Image";
@@ -5,6 +6,8 @@ import AddCartModal from "../../modal/AddCartModal";
 import Button from "../../atoms/Button";
 import Text from "../../atoms/Text";
 import styled from "styled-components";
+import { useAuth } from "../../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const StyledProductCard = styled.div`
     display: flex;
@@ -30,10 +33,17 @@ interface ProductTypeProps {
 
 const ProductCard = ({ id, image_path, title, price }: ProductTypeProps) => {
     const [modalFlag, setModalFlag] = useState(false);
+    const { user } = useAuth();
+    const navigate = useNavigate();
+
     const handleCartAdd = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const form = e.target as HTMLFormElement;
         const targetId = form.product_id.value;
+
+        if(!user){
+            navigate('/login');
+        }
 
         try {
             await addCart(targetId);

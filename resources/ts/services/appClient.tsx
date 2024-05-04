@@ -93,3 +93,17 @@ export const sendContact = async (formData:formData) => {
         throw error;
     }
 };
+
+export const createToken = async (tokenName: string) => {
+    try {
+        const response = await apiClient.post("/tokens/create", { token_name: tokenName }, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error creating token:", error);
+        throw error;
+    }
+};

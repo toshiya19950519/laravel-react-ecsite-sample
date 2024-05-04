@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,7 +13,6 @@ class ProductController extends Controller
     public function index()
     {
         $response = Product::paginate(5);
-        Debugbar::info($response);
         return response()->json($response);
     }
 

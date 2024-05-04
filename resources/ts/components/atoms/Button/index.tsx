@@ -15,7 +15,6 @@ const StyledButton = styled.button<StyledButtonProps>`
   color: white;
   font-weight: bold;
   border: none;
-  border-radius: 0.5em;
   cursor: pointer;
   transition: background-color 0.3s ease;
   width: ${props => typeof props.width === 'number' ? `${props.width}px` : props.width};
